@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres2
+    ports:
+      - '5433:5432' 
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ndryl
+      POSTGRES_PASSWORD: 4b4014bb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
