@@ -3,11 +3,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from 'scemas/scema01'; // Ajuste o caminho conforme sua estrutura
+import {
+  User,
+  Colecao,
+  Pedido,
+  PedidoItens,
+  Posto,
+  Produto,
+} from 'scemas/scema01'; // Ajuste o caminho conforme sua estrutura
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot(), // 📌 Carrega variáveis do .env
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
@@ -15,9 +23,13 @@ import { User } from 'scemas/scema01'; // Ajuste o caminho conforme sua estrutur
       username: process.env.DB_USERNAME || 'user',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_NAME || 'dbname',
-      entities: [User], // ✅ Registre suas entidades aqui!
-      synchronize: true, // ⚠️ Apenas para desenvolvimento!
+      entities: [User, Posto, Colecao, Produto, Pedido, PedidoItens], // ✅ Registrando entidades
+      synchronize: process.env.NODE_ENV !== 'production', // ⚠️ Evita problemas em produção!
+      autoLoadEntities: true, // 🔹 Garante que novas entidades sejam detectadas automaticamente
     }),
+
+    // 📌 Adicionando módulos específicos para organização
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
