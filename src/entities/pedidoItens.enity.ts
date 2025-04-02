@@ -1,3 +1,4 @@
+import { Pedido, Produto } from 'scemas/scema01';
 import {
   Entity,
   PrimaryGeneratedColumn,

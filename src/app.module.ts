@@ -12,6 +12,9 @@ import {
   Produto,
 } from 'scemas/scema01'; // Ajuste o caminho conforme sua estrutura
 import { UserModule } from './user/user.module';
+import { PostoModule } from './Posto/posto.module';
+import { ColecaoModule } from './Colecao/colecao.module';
+import { PedidoItensModule } from './PedidoItem/pedidoItem.module';
 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import { UserModule } from './user/user.module';
 
     // 📌 Adicionando módulos específicos para organização
     UserModule,
+    PostoModule,
+    ColecaoModule,
+    PedidoItensModule,
   ],
   controllers: [AppController],
   providers: [AppService],
